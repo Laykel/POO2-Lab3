@@ -45,8 +45,7 @@ class List {
 public:
     /**
      * Empty constructor
-     * <p>
-     * Creates a null root
+     * <p>Creates null head and tail</p>
      */
     explicit List();
 
@@ -55,33 +54,46 @@ public:
       *
       * @param args The initializer list
       */
-    List(std::initializer_list<T> args);
+    List(const std::initializer_list<T>& args);
 
     /**
      * Copy constructor
      *
-     * @param list The list to copy from
+     * @param other The list to copy from
      */
-    List(const List& list);
+    List(const List& other);
 
     /**
      * Destructor
      */
     virtual ~List();
 
-    List& operator=(const List& a);
+    /**
+     * Assignment operator
+     *
+     * @param other The list from which to copy
+     * @return A reference to a new list with identical elements to other
+     */
+    List& operator=(const List& other);
+
+    /**
+     * Get the number of elements in the list
+     *
+     * @return The size of the list
+     */
+    size_t size() const;
 
     T& operator[](const size_t index) const;
-
-    size_t size() const;
 
 //    Iterator begin();
 
 //    Iterator end();
 
 private:
-    // Root node of the list
-    Node* root;
+    // Head node of the list
+    Node* head;
+    // Tail node of the list
+    Node* tail;
 
     // Size of the list
     size_t _size;
