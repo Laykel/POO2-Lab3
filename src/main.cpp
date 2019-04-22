@@ -17,31 +17,31 @@ using namespace std;
 
 // Test program for List class (almost unit tests)
 int main() {
-    cout << "Test simple constructor" << endl;
+    cout << "Test simple constructor (l1)" << endl;
     List<int> l1;
     cout << l1 << endl;
     cout << string(30, '-') << endl;
 
-    cout << "Test initializer list constructor" << endl;
+    cout << "Test initializer list constructor (l2)" << endl;
     List<int> l2{12, 13, 56, 90, 0};
     cout << l2 << endl;
     cout << string(30, '-') << endl;
 
-    cout << "Test copy constructor" << endl;
+    cout << "Test copy constructor (l3(l2))" << endl;
     List<int> l3(l2);
     cout << l3 << endl;
+    cout << string(30, '-') << endl;
+
+    cout << "Test assignment operator (l1 = l3)" << endl;
+    l1 = l3;
+    cout << l1 << endl;
     cout << string(30, '-') << endl;
 
 //    cout << "Test write with brackets operator" << endl;
 //    l3[2] = 9;
 //    cout << l3 << endl;
 //    cout << string(30, '-') << endl;
-//
-//    cout << "Test assigment operator" << endl;
-//    l1 = l3;
-//    cout << l1 << endl;
-//    cout << string(30, '-') << endl;
-//
+
 //    cout << "Test iterators on list of strings" << endl;
 //    List<string> l5{"what", "a", "beautiful", "world"};
 //    // Test iterators

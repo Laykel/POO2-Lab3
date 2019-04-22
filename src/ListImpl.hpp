@@ -73,27 +73,36 @@ List<T>::~List() {
 // Assignment operator
 template <typename T>
 List<T>& List<T>::operator= (const List& other) {
+    // No-op if the other list is the current one
     if (&other == this) {
         return *this;
     }
 
-    if (other.size() == 0) {
-        head = tail = nullptr;
-        _size = 0;
+    // TODO replace with a private destroy helper (same as destructor)
+    // Deallocate memory of current list
+    while (head != nullptr) {
+        Node* tmp = head->next;
+        delete head;
+        head = tmp;
     }
-    else {
-        // TODO replace with a private init method when iterators are implemented (same as initializer list constructor)
-        Node* node = other.head;
-        head = new Node{node->data, nullptr, nullptr};
-        tail = head;
-        node = node->next;
 
-        while (node != nullptr) {
-            tail->next = new Node{node->data, tail, nullptr};
-            tail = tail->next;
-            node = node->next;
-        }
+    // Reinitialize
+    head = tail = nullptr;
+    _size = other.size();
+
+    // TODO replace with a private init method when iterators are implemented (same as initializer list constructor)
+    Node* node = other.head;
+    head = new Node{node->data, nullptr, nullptr};
+    tail = head;
+    node = node->next;
+
+    while (node != nullptr) {
+        tail->next = new Node{node->data, tail, nullptr};
+        tail = tail->next;
+        node = node->next;
     }
+
+    return *this;
 }
 
 // Get the number of elements in the list
