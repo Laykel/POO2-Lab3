@@ -74,7 +74,6 @@ List<T>& List<T>::operator= (const List& other) {
         return *this;
     }
 
-    // TODO replace with a private destroy helper (same as destructor)
     // Deallocate memory of current list
     destroy(head);
 
