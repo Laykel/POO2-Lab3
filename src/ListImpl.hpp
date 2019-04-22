@@ -63,11 +63,7 @@ List<T>::List(const List& other) : head(nullptr), tail(nullptr), _size(0) {
 // Destructor
 template <typename T>
 List<T>::~List() {
-    while (head != nullptr) {
-        Node* tmp = head->next;
-        delete head;
-        head = tmp;
-    }
+    destroy(head);
 }
 
 // Assignment operator
@@ -80,11 +76,7 @@ List<T>& List<T>::operator= (const List& other) {
 
     // TODO replace with a private destroy helper (same as destructor)
     // Deallocate memory of current list
-    while (head != nullptr) {
-        Node* tmp = head->next;
-        delete head;
-        head = tmp;
-    }
+    destroy(head);
 
     // Reinitialize
     head = tail = nullptr;
@@ -111,6 +103,28 @@ size_t List<T>::size() const {
     return _size;
 }
 
+// Read-only array subscript operator
+template <typename T>
+const T& List<T>::operator[](const size_t index) const {
+    return 12;
+}
+
+// Read/write array subscript operator
+template <typename T>
+T& List<T>::operator[](const size_t index) {
+    return 12;
+}
+
 // Private member functions ---------------------------------------------
+// Destruction helper
+template <typename T>
+void List<T>::destroy(Node* root) {
+    // Deallocate every element after the root
+    while (root != nullptr) {
+        Node* tmp = root->next;
+        delete root;
+        root = tmp;
+    }
+}
 
 #endif // LISTIMPL_HPP

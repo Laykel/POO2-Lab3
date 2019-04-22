@@ -83,11 +83,31 @@ public:
      */
     size_t size() const;
 
-    T& operator[](const size_t index) const;
+    /**
+     * Read-only array subscript operator
+     *
+     * @param index The index of the element to access
+     * @return A reference to the (constant) value of the element at index
+     */
+    const T& operator[](const size_t index) const;
+
+    /**
+     * Read/write array subscript operator
+     *
+     * @param index The index of the element to access
+     * @return A reference to the value of the element at index
+     */
+    T& operator[](const size_t index);
 
 //    Iterator begin();
 
 //    Iterator end();
+
+private:
+    /**
+     * Helper for the destruction of list or sub-lists
+     */
+    void destroy(Node* root);
 
 private:
     // Head node of the list
