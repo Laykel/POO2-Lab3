@@ -124,6 +124,7 @@ void List<T>::insert(const T& o) {
       head->previous = new Node{o, nullptr, head};
       head = head->previous;
    }
+   _size++;
 }
 
 template <typename T>
@@ -137,6 +138,36 @@ void List<T>::append(const T& o) {
       tail->next = new Node{o, tail, nullptr};
       tail = tail->next;
    }
+   _size++;
+}
+
+template <typename T>
+void List<T>::removeAt(size_t index) {
+   if(index >= _size) {
+      // Throw exception ?
+      std::cout << "Out of range !";
+      return;
+   }
+   // Un peu moche non ?
+   Node* toRemove = head;
+   for(int i = 0; i < index; i++) {
+      toRemove = toRemove->next;
+   }
+   
+   if(toRemove->previous != nullptr) {
+      toRemove->previous->next = toRemove->next;
+   }
+   else {
+      head = toRemove->next;
+   }
+   if(toRemove->next != nullptr) {
+      toRemove->next->previous = toRemove->previous;
+   }
+   else {
+      tail = toRemove->previous;
+   }
+   delete toRemove;
+   _size--;
 }
 
 // Private member functions ---------------------------------------------

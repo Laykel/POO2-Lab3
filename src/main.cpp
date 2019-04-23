@@ -59,6 +59,16 @@ int main() {
     cout << ls2 << endl;
     cout << string(30, '-') << endl;
     
+    cout << "Test removeAt on list with one element ls2.removeAt(0)" << endl;
+    ls2.removeAt(0);
+    cout << ls2 << endl;
+    cout << string(30, '-') << endl;
+    
+    cout << "Test removeAt l2.removeAt(3)" << endl;
+    l2.removeAt(3);
+    cout << l2 << endl;
+    cout << string(30, '-') << endl;
+    
 //    cout << "Test write with brackets operator" << endl;
 //    l3[2] = 9;
 //    cout << l3 << endl;

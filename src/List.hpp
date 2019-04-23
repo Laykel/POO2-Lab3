@@ -113,8 +113,12 @@ public:
      */
     void append(const T& o);
     
-    
-
+    /**
+     * Remove the element at specified index
+     * 
+     * @param index Index of the element to remove
+     */
+    void removeAt(size_t index);
 //    Iterator begin();
 
 //    Iterator end();
