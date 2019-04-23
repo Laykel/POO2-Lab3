@@ -37,6 +37,28 @@ int main() {
     cout << l1 << endl;
     cout << string(30, '-') << endl;
 
+    cout << "Test append method l2.append(42)" << endl;
+    l2.append(42);
+    cout << l2 << endl;
+    cout << string(30, '-') << endl;
+    
+    cout << "Test insert method l2.insert(23)" << endl;
+    l2.insert(23);
+    cout << l2 << endl;
+    cout << string(30, '-') << endl;
+    
+    cout << "Test insert on empty list ls1.insert(\"Hello\")" << endl;
+    List<string> ls1;
+    ls1.insert("Hello");
+    cout << ls1 << endl;
+    cout << string(30, '-') << endl;
+    
+    cout << "Test append on empty list ls2.apennd(\"Ca boom ?\")" << endl;
+    List<string> ls2;
+    ls2.append("Ca boom ?");
+    cout << ls2 << endl;
+    cout << string(30, '-') << endl;
+    
 //    cout << "Test write with brackets operator" << endl;
 //    l3[2] = 9;
 //    cout << l3 << endl;

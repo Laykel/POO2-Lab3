@@ -98,6 +98,22 @@ public:
      * @return A reference to the value of the element at index
      */
     T& operator[](const size_t index);
+    
+    /**
+     * Insert an object at the beginning of the list
+     * 
+     * @param o A constant reference to the object to insert
+     */
+    void insert(const T& o);
+    
+    /**
+     * Insert an object at the end of the list
+     * 
+     * @param o A constant reference to the object to append
+     */
+    void append(const T& o);
+    
+    
 
 //    Iterator begin();
 

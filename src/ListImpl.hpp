@@ -13,7 +13,6 @@
 #ifndef LISTIMPL_HPP
 #define LISTIMPL_HPP
 
-// Dummy include for IDE
 #include "List.hpp"
 
 // Friend functions ---------------------------------------------
@@ -112,6 +111,32 @@ const T& List<T>::operator[](const size_t index) const {
 template <typename T>
 T& List<T>::operator[](const size_t index) {
     return 12;
+}
+
+template <typename T>
+void List<T>::insert(const T& o) {
+   // If the list is empty
+   if(head == nullptr) {
+    head = new Node{o, nullptr, nullptr};
+    tail = head;
+   }
+   else {
+      head->previous = new Node{o, nullptr, head};
+      head = head->previous;
+   }
+}
+
+template <typename T>
+void List<T>::append(const T& o) {
+   // If the list is empty
+   if(head == nullptr) {
+    head = new Node{o, nullptr, nullptr};
+    tail = head;
+   }
+   else {
+      tail->next = new Node{o, tail, nullptr};
+      tail = tail->next;
+   }
 }
 
 // Private member functions ---------------------------------------------
