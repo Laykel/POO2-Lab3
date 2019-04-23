@@ -150,7 +150,7 @@ void List<T>::removeAt(size_t index) {
    }
    // Un peu moche non ?
    Node* toRemove = head;
-   for(int i = 0; i < index; i++) {
+   for(size_t i = 0; i < index; i++) {
       toRemove = toRemove->next;
    }
    
@@ -168,6 +168,32 @@ void List<T>::removeAt(size_t index) {
    }
    delete toRemove;
    _size--;
+}
+
+template <typename T>
+void List<T>::remove(const T& o) {
+   int index = find(o);
+   if(index != -1) {
+      removeAt(index);
+   }
+   else {
+      std::cout << "Object not in the list !" << std::endl; 
+   }
+}
+
+template <typename T>
+int List<T>::find(const T& o) const {
+
+   Node* current = head;
+   int index = 0;
+   while(current != nullptr) {
+      if(current->data == o) {
+         return index;
+      }
+      current = current->next;
+      index++;
+   }
+   return -1;
 }
 
 // Private member functions ---------------------------------------------

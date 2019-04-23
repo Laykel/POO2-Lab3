@@ -69,6 +69,15 @@ int main() {
     cout << l2 << endl;
     cout << string(30, '-') << endl;
     
+    cout << "Test find l2.find(90)" << endl;
+    cout << "Index of 90 is " << l2.find(90) << endl;
+    cout << string(30, '-') << endl;
+    
+    cout << "Test remove(object) ls1.remove(\"Hello\")" << endl;
+    ls1.remove("Hello");
+    cout << ls1 << endl;
+    cout << string(30, '-') << endl;
+    
 //    cout << "Test write with brackets operator" << endl;
 //    l3[2] = 9;
 //    cout << l3 << endl;

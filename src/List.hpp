@@ -119,6 +119,21 @@ public:
      * @param index Index of the element to remove
      */
     void removeAt(size_t index);
+    
+    /**
+     * Remove the object o if it is in the list
+     * 
+     * @param o The object to remove
+     */
+    void remove(const T& o);
+    
+    /**
+     * Find an object if it is in the list
+     * 
+     * @param o The object to find
+     * @return The index of the object or -1 if it is not in the list
+     */
+    int find(const T& o) const;
 //    Iterator begin();
 
 //    Iterator end();
