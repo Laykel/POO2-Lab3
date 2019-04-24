@@ -32,6 +32,11 @@ int main() {
     cout << l3 << endl;
     cout << string(30, '-') << endl;
 
+    cout << "Test list of strings" << endl;
+    List<string> ls1{"Rohan", "Gondor"};
+    cout << ls1 << endl;
+    cout << string(30, '-') << endl;
+
     cout << "Test assignment operator (l1 = l3)" << endl;
     l1 = l3;
     cout << l1 << endl;
@@ -47,21 +52,19 @@ int main() {
     cout << l2 << endl;
     cout << string(30, '-') << endl;
     
-    cout << "Test insert on empty list ls1.insert(\"Hello\")" << endl;
-    List<string> ls1;
+    cout << "Test insert on empty list l1.insert(\"Hello\")" << endl;
     ls1.insert("Hello");
     cout << ls1 << endl;
     cout << string(30, '-') << endl;
     
-    cout << "Test append on empty list ls2.apennd(\"Ca boom ?\")" << endl;
-    List<string> ls2;
-    ls2.append("Ca boom ?");
-    cout << ls2 << endl;
+    cout << "Test append on empty list ls1.append(\"Ca boom ?\")" << endl;
+    ls1.append("Ca boom ?");
+    cout << ls1 << endl;
     cout << string(30, '-') << endl;
     
-    cout << "Test removeAt on list with one element ls2.removeAt(0)" << endl;
-    ls2.removeAt(0);
-    cout << ls2 << endl;
+    cout << "Test removeAt on list with one element ls1.removeAt(1)" << endl;
+    ls1.removeAt(1);
+    cout << ls1 << endl;
     cout << string(30, '-') << endl;
     
     cout << "Test removeAt l2.removeAt(3)" << endl;
@@ -77,7 +80,12 @@ int main() {
     ls1.remove("Hello");
     cout << ls1 << endl;
     cout << string(30, '-') << endl;
-    
+
+    cout << "Test remove(object) ls1.remove(\"NotHere\")" << endl;
+    ls1.remove("NotHere");
+    cout << ls1 << endl;
+    cout << string(30, '-') << endl;
+
 //    cout << "Test write with brackets operator" << endl;
 //    l3[2] = 9;
 //    cout << l3 << endl;
