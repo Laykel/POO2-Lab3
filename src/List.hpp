@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------
- * Lab         : Laboratoire 3 - Liste
- * File        : List.cpp
- * Author(s)   : Alison Savary et Luc Wachter
- * Date        : 11.04.2019
+ * Lab       : Laboratoire 3 - Liste
+ * File      : List.cpp
+ * Author(s) : Alison Savary et Luc Wachter
+ * Date      : 11.04.2019
  *
- * Goal        : Implement a generic doubly linked list
+ * Goal      : Describe a generic doubly linked list
  *
- * Compilateur : g++ version 8.2.0
+ * Compiler  : g++ version 8.2.0
  * ---------------------------------------------------------------------------------
  */
 
@@ -33,7 +33,7 @@ class List {
    friend std::ostream& operator<< <>(std::ostream& os, const List& a);
 
    /**
-    * Node composing the list
+    * Elements of the list, with pointers to next and previous elements
     */
    struct Node {
       T data;

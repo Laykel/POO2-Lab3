@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------
- * Lab         : Laboratoire 3 - Liste
- * File        : ListImpl.cpp
- * Author(s)   : Alison Savary et Luc Wachter
- * Date        : 11.04.2019
+ * Lab       : Laboratoire 3 - Liste
+ * File      : ListImpl.cpp
+ * Author(s) : Alison Savary et Luc Wachter
+ * Date      : 11.04.2019
  *
- * Goal        :
+ * Goal      : Implement a generic doubly linked list
  *
- * Compilateur : g++ version 8.2.0
+ * Compiler  : g++ version 8.2.0
  * ---------------------------------------------------------------------------------
  */
 
@@ -14,6 +14,7 @@
 #define LISTIMPL_HPP
 
 #include "List.hpp"
+#include <stdexcept>
 
 // Friend functions ---------------------------------------------
 
@@ -214,9 +215,7 @@ void List<T>::destroy(Node* root) {
 template <typename T>
 typename List<T>::Node* List<T>::accessAt(size_t index) {
    if (index >= _size) {
-      // TODO Throw exception
-      std::cout << "Out of range !";
-      return nullptr;
+      throw std::out_of_range("Index out of range of list size.");
    }
 
    Node* node = head;
