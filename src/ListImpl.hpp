@@ -146,24 +146,16 @@ void List<T>::append(const T& o) {
 // Remove the element at the specified index
 template <typename T>
 void List<T>::removeAt(size_t index) {
-   if (index >= _size) {
-      // TODO Throw exception
-      std::cout << "Out of range !";
-      return;
-   }
+   Node* toRemove = accessAt(index);
 
-   // Un peu moche non ?
-   Node* toRemove = head;
-   for (size_t i = 0; i < index; i++) {
-      toRemove = toRemove->next;
-   }
-
+   // Check previous node
    if (toRemove->previous != nullptr) {
       toRemove->previous->next = toRemove->next;
    }
    else {
       head = toRemove->next;
    }
+   // Check next node
    if (toRemove->next != nullptr) {
       toRemove->next->previous = toRemove->previous;
    }
@@ -171,6 +163,7 @@ void List<T>::removeAt(size_t index) {
       tail = toRemove->previous;
    }
 
+   // Deallocate specified node
    delete toRemove;
    _size--;
 }
@@ -187,6 +180,7 @@ void List<T>::remove(const T& o) {
    }
 }
 
+// Find given element in list, returns index (first occurrence)
 template <typename T>
 int List<T>::find(const T& o) const {
    Node* current = head;
@@ -199,6 +193,7 @@ int List<T>::find(const T& o) const {
       current = current->next;
       index++;
    }
+
    return -1;
 }
 
@@ -218,6 +213,12 @@ void List<T>::destroy(Node* root) {
 // Helper index access function
 template <typename T>
 typename List<T>::Node* List<T>::accessAt(size_t index) {
+   if (index >= _size) {
+      // TODO Throw exception
+      std::cout << "Out of range !";
+      return nullptr;
+   }
+
    Node* node = head;
    for (size_t i = 0; i < index; i++) {
       node = node->next;
