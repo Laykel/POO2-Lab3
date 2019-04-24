@@ -104,13 +104,13 @@ size_t List<T>::size() const {
 // Read-only array subscript operator
 template <typename T>
 const T& List<T>::operator[](const size_t index) const {
-   return 12;
+   return accessAt(index)->data;
 }
 
 // Read/write array subscript operator
 template <typename T>
 T& List<T>::operator[](const size_t index) {
-   return 12;
+   return accessAt(index)->data;
 }
 
 // Insert new element to the start of the list
@@ -147,7 +147,7 @@ void List<T>::append(const T& o) {
 template <typename T>
 void List<T>::removeAt(size_t index) {
    if (index >= _size) {
-      // Throw exception ?
+      // TODO Throw exception
       std::cout << "Out of range !";
       return;
    }
@@ -213,6 +213,17 @@ void List<T>::destroy(Node* root) {
       delete root;
       root = tmp;
    }
+}
+
+// Helper index access function
+template <typename T>
+typename List<T>::Node* List<T>::accessAt(size_t index) {
+   Node* node = head;
+   for (size_t i = 0; i < index; i++) {
+      node = node->next;
+   }
+
+   return node;
 }
 
 #endif // LISTIMPL_HPP

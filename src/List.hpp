@@ -145,6 +145,13 @@ private:
     */
    void destroy(Node* root);
 
+   /**
+    * Helper index access member function
+    *
+    * @param index The index of the node to access
+    */
+    Node* accessAt(size_t index);
+
 private:
    // Head node of the list
    Node* head;

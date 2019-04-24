@@ -86,10 +86,10 @@ int main() {
     cout << ls1 << endl;
     cout << string(30, '-') << endl;
 
-//    cout << "Test write with brackets operator" << endl;
-//    l3[2] = 9;
-//    cout << l3 << endl;
-//    cout << string(30, '-') << endl;
+    cout << "Test write with brackets operator" << endl;
+    l3[2] = 9;
+    cout << l3 << endl;
+    cout << string(30, '-') << endl;
 
 //    cout << "Test iterators on list of strings" << endl;
 //    List<string> l5{"what", "a", "beautiful", "world"};
