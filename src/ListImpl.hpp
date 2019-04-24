@@ -20,14 +20,14 @@
 // Output stream operator
 template <typename T>
 std::ostream& operator<< (std::ostream& os, const List<T>& list) {
-    auto node = list.head;
+   auto node = list.head;
 
-    while (node != nullptr) {
-        os << node->data << " ";
-        node = node->next;
-    }
+   while (node != nullptr) {
+      os << node->data << " ";
+      node = node->next;
+   }
 
-    return os;
+   return os;
 }
 
 // Member functions ---------------------------------------------
@@ -39,86 +39,87 @@ List<T>::List() : head(nullptr), tail(nullptr), _size(0) {}
 // Initializer list constructor
 template <typename T>
 List<T>::List(const std::initializer_list<T>& args) : _size(args.size()) {
-    // Insert first value
-    head = new Node{*args.begin(), nullptr, nullptr};
-    tail = head;
+   // Insert first value
+   head = new Node{*args.begin(), nullptr, nullptr};
+   tail = head;
 
-    // Read initializer list's values
-    for (const T* elem = args.begin()+1; elem != args.end(); ++elem) {
-        // Create new element and update previous node's next
-        tail->next = new Node{*elem, tail, nullptr};
-        // Update tail
-        tail = tail->next;
-    }
+   // Read initializer list's values
+   for (const T* elem = args.begin()+1; elem != args.end(); ++elem) {
+      // Create new element and update previous node's next
+      tail->next = new Node{*elem, tail, nullptr};
+      // Update tail
+      tail = tail->next;
+   }
 }
 
 // Copy constructor
 template <typename T>
 List<T>::List(const List& other) : head(nullptr), tail(nullptr), _size(0) {
-    // Call assignment operator
-    *this = other;
+   // Call assignment operator
+   *this = other;
 }
 
 // Destructor
 template <typename T>
 List<T>::~List() {
-    destroy(head);
+   destroy(head);
 }
 
 // Assignment operator
 template <typename T>
 List<T>& List<T>::operator= (const List& other) {
-    // No-op if the other list is the current one
-    if (&other == this) {
-        return *this;
-    }
+   // No-op if the other list is the current one
+   if (&other == this) {
+      return *this;
+   }
 
-    // Deallocate memory of current list
-    destroy(head);
+   // Deallocate memory of current list
+   destroy(head);
 
-    // Reinitialize
-    head = tail = nullptr;
-    _size = other.size();
+   // Reinitialize
+   head = tail = nullptr;
+   _size = other.size();
 
-    // TODO replace with a private init method when iterators are implemented (same as initializer list constructor)
-    Node* node = other.head;
-    head = new Node{node->data, nullptr, nullptr};
-    tail = head;
-    node = node->next;
+   // TODO replace with a private init method when iterators are implemented (same as initializer list constructor)
+   Node* node = other.head;
+   head = new Node{node->data, nullptr, nullptr};
+   tail = head;
+   node = node->next;
 
-    while (node != nullptr) {
-        tail->next = new Node{node->data, tail, nullptr};
-        tail = tail->next;
-        node = node->next;
-    }
+   while (node != nullptr) {
+      tail->next = new Node{node->data, tail, nullptr};
+      tail = tail->next;
+      node = node->next;
+   }
 
-    return *this;
+   return *this;
 }
 
 // Get the number of elements in the list
 template <typename T>
 size_t List<T>::size() const {
-    return _size;
+   return _size;
 }
 
 // Read-only array subscript operator
 template <typename T>
 const T& List<T>::operator[](const size_t index) const {
-    return 12;
+   return 12;
 }
 
 // Read/write array subscript operator
 template <typename T>
 T& List<T>::operator[](const size_t index) {
-    return 12;
+   return 12;
 }
 
+// Insert new element to the start of the list
 template <typename T>
 void List<T>::insert(const T& o) {
    // If the list is empty
-   if(head == nullptr) {
-    head = new Node{o, nullptr, nullptr};
-    tail = head;
+   if (head == nullptr) {
+      head = new Node{o, nullptr, nullptr};
+      tail = head;
    }
    else {
       head->previous = new Node{o, nullptr, head};
@@ -127,12 +128,13 @@ void List<T>::insert(const T& o) {
    _size++;
 }
 
+// Insert new element to the end of the list
 template <typename T>
 void List<T>::append(const T& o) {
    // If the list is empty
-   if(head == nullptr) {
-    head = new Node{o, nullptr, nullptr};
-    tail = head;
+   if (head == nullptr) {
+      head = new Node{o, nullptr, nullptr};
+      tail = head;
    }
    else {
       tail->next = new Node{o, tail, nullptr};
@@ -141,53 +143,57 @@ void List<T>::append(const T& o) {
    _size++;
 }
 
+// Remove the element at the specified index
 template <typename T>
 void List<T>::removeAt(size_t index) {
-   if(index >= _size) {
+   if (index >= _size) {
       // Throw exception ?
       std::cout << "Out of range !";
       return;
    }
+
    // Un peu moche non ?
    Node* toRemove = head;
-   for(size_t i = 0; i < index; i++) {
+   for (size_t i = 0; i < index; i++) {
       toRemove = toRemove->next;
    }
-   
-   if(toRemove->previous != nullptr) {
+
+   if (toRemove->previous != nullptr) {
       toRemove->previous->next = toRemove->next;
    }
    else {
       head = toRemove->next;
    }
-   if(toRemove->next != nullptr) {
+   if (toRemove->next != nullptr) {
       toRemove->next->previous = toRemove->previous;
    }
    else {
       tail = toRemove->previous;
    }
+
    delete toRemove;
    _size--;
 }
 
+// Remove given element (first occurrence)
 template <typename T>
 void List<T>::remove(const T& o) {
    int index = find(o);
-   if(index != -1) {
+   if (index != -1) {
       removeAt(index);
    }
    else {
-      std::cout << "Object not in the list !" << std::endl; 
+      std::cout << "Object not in the list !" << std::endl;
    }
 }
 
 template <typename T>
 int List<T>::find(const T& o) const {
-
    Node* current = head;
    int index = 0;
-   while(current != nullptr) {
-      if(current->data == o) {
+
+   while (current != nullptr) {
+      if (current->data == o) {
          return index;
       }
       current = current->next;
@@ -197,15 +203,16 @@ int List<T>::find(const T& o) const {
 }
 
 // Private member functions ---------------------------------------------
+
 // Destruction helper
 template <typename T>
 void List<T>::destroy(Node* root) {
-    // Deallocate every element after the root
-    while (root != nullptr) {
-        Node* tmp = root->next;
-        delete root;
-        root = tmp;
-    }
+   // Deallocate every element after the root
+   while (root != nullptr) {
+      Node* tmp = root->next;
+      delete root;
+      root = tmp;
+   }
 }
 
 #endif // LISTIMPL_HPP
