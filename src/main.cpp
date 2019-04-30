@@ -33,8 +33,8 @@ int main() {
    cout << string(30, '-') << endl;
 
    cout << "Test list of strings" << endl;
-   List<string> ls1{"Rohan", "Gondor"};
-   cout << ls1 << endl;
+   List<string>* l4 = new List<string>{"Rohan", "Gondor"};
+   cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
    cout << "Test assignment operator (l1 = l3)" << endl;
@@ -53,18 +53,18 @@ int main() {
    cout << string(30, '-') << endl;
 
    cout << "Test insert on empty list l1.insert(\"Hello\")" << endl;
-   ls1.insert("Hello");
-   cout << ls1 << endl;
+   l4->insert("Hello");
+   cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test append on empty list ls1.append(\"Ca boom ?\")" << endl;
-   ls1.append("Ca boom ?");
-   cout << ls1 << endl;
+   cout << "Test append on empty list l4.append(\"Ca boom ?\")" << endl;
+   l4->append("Ca boom ?");
+   cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test removeAt on list with one element ls1.removeAt(1)" << endl;
-   ls1.removeAt(1);
-   cout << ls1 << endl;
+   cout << "Test removeAt on list with one element l4.removeAt(1)" << endl;
+   l4->removeAt(1);
+   cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
    cout << "Test removeAt l2.removeAt(3)" << endl;
@@ -76,14 +76,14 @@ int main() {
    cout << "Index of 90 is " << l2.find(90) << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test remove(object) ls1.remove(\"Hello\")" << endl;
-   ls1.remove("Hello");
-   cout << ls1 << endl;
+   cout << "Test remove(object) l4.remove(\"Hello\")" << endl;
+   l4->remove("Hello");
+   cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test remove(object) ls1.remove(\"NotHere\")" << endl;
-   ls1.remove("NotHere");
-   cout << ls1 << endl;
+   cout << "Test remove(object) l4.remove(\"NotHere\")" << endl;
+   l4->remove("NotHere");
+   cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
    cout << "Test write with brackets operator" << endl;
@@ -110,6 +110,9 @@ int main() {
       cout << i << " ";
    }
    cout << endl << string(30, '-') << endl;
+
+   // Deallocate l4
+   delete l4;
 
    // Given tests in the assignment
    {
