@@ -198,6 +198,30 @@ int List<T>::find(const T& o) const {
    return -1;
 }
 
+// Return a generic iterator pointing to the beginning of the list
+template <typename T>
+typename List<T>::Iterator List<T>::begin() {
+   return Iterator(head);
+}
+
+// Return a generic iterator pointing to the end of the list
+template <typename T>
+typename List<T>::Iterator List<T>::end() {
+   return Iterator(tail);
+}
+
+// Return a generic iterator pointing to the beginning of the list
+template <typename T>
+typename List<T>::ConstIterator List<T>::begin() const {
+   return ConstIterator(head);
+}
+
+// Return a generic iterator pointing to the end of the list
+template <typename T>
+typename List<T>::ConstIterator List<T>::end() const {
+   return ConstIterator(tail);
+}
+
 // Private member functions ---------------------------------------------
 
 // Destruction helper

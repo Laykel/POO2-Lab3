@@ -42,6 +42,80 @@ class List {
       Node* next;
    };
 
+   /**
+    * Generic iterator class
+    */
+   class GenericIterator {
+   public:
+      //! Constructor
+      GenericIterator(Node* pointer)
+      : pointer(pointer) {}
+
+      // Prefix ++
+      virtual GenericIterator& operator++() {
+         pointer = pointer->next;
+         return *this;
+      }
+
+      // Prefix --
+      virtual GenericIterator& operator--() {
+         pointer = pointer->previous;
+         return *this;
+      }
+
+      virtual bool operator==(const GenericIterator& val) const {
+         return (pointer == val.pointer);
+      }
+
+      virtual bool operator!=(const GenericIterator& val) const {
+         return !(val == *this);
+      }
+
+      // Other ++, -> ...
+
+   protected:
+      Node* pointer;
+   };
+
+public:
+   /**
+    * Iterator class for read/write access
+    */
+   class Iterator : public GenericIterator {
+   public:
+      //! Constructor
+      Iterator(Node* pointer)
+      : GenericIterator(pointer) {}
+
+      /**
+       * Member access operator (read/write)
+       *
+       * @return The value in the node pointed to by the iterator
+       */
+      T& operator*() {
+         return this->pointer->data;
+      }
+   };
+
+   /**
+    * Iterator class for read-only access
+    */
+   class ConstIterator : public GenericIterator {
+   public:
+      //! Constructor
+      ConstIterator(Node* pointer)
+      : GenericIterator(pointer) {}
+
+      /**
+       * Member access operator (read-only)
+       *
+       * @return The value in the node pointed to by the iterator
+       */
+      const T& operator*() {
+         return this->pointer->data;
+      }
+   };
+
 public:
    /**
     * Empty constructor
@@ -135,9 +209,33 @@ public:
     */
    int find(const T& o) const;
 
-//    Iterator begin();
+   /**
+    * Get an iterator to the beginning of the list for read/write access
+    *
+    * @return a generic iterator pointing to the first element of the list
+    */
+   Iterator begin();
 
-//    Iterator end();
+   /**
+    * Get an iterator to the end of the list for read/write access
+    *
+    * @return a generic iterator pointing to the last element of the list
+    */
+   Iterator end();
+
+   /**
+    * Get an iterator to the beginning of the list for read-only access
+    *
+    * @return a generic iterator pointing to the first element of the list
+    */
+   ConstIterator begin() const;
+
+   /**
+    * Get an iterator to the end of the list for read-only access
+    *
+    * @return a generic iterator pointing to the last element of the list
+    */
+   ConstIterator end() const;
 
 private:
    /**

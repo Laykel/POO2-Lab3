@@ -28,7 +28,7 @@ int main() {
    cout << string(30, '-') << endl;
 
    cout << "Test copy constructor (l3(l2))" << endl;
-   List<int> l3(l2);
+   const List<int> l3(l2);
    cout << l3 << endl;
    cout << string(30, '-') << endl;
 
@@ -87,23 +87,29 @@ int main() {
    cout << string(30, '-') << endl;
 
    cout << "Test write with brackets operator" << endl;
-   l3[2] = 9;
-   cout << l3 << endl;
+   l2[2] = 9;
+   cout << l2 << endl;
    cout << string(30, '-') << endl;
 
-//    cout << "Test iterators on list of strings" << endl;
-//    List<string> l5{"what", "a", "beautiful", "world"};
-//    // Test iterators
-//    for (auto it = l5.begin(); it != l5.end(); ++it) {
-//        cout << &*it << " - " << *it << endl;
-//    }
-//    cout << string(30, '-') << endl;
-//
-//    cout << "Test for each with iterators" << endl;
-//    for (string s : l5) {
-//        cout << s << ", ";
-//    }
-//    cout << endl;
+   cout << "Test iterators on list of strings" << endl;
+   List<string> l5{"what", "a", "beautiful", "world"};
+   // Test iterators
+   for (auto it = l5.begin(); it != l5.end(); ++it) {
+      cout << &*it << " - " << *it << endl;
+   }
+   cout << string(30, '-') << endl;
+
+   cout << "Test for each with iterators" << endl;
+   for (string s : l5) {
+      cout << s << " ";
+   }
+   cout << endl << string(30, '-') << endl;
+
+   cout << "Test for each with const iterators" << endl;
+   for (int i : l3) {
+      cout << i << " ";
+   }
+   cout << endl << string(30, '-') << endl;
 
    // Given tests in the assignment
    {
@@ -111,15 +117,17 @@ int main() {
       l.append("un");
       l.append("deux");
       l.append("trois");
-//       for (List<string>::Iterator it = l.begin(); it != l.end(); ++it)
-//          cout << *it << " ";
-//       cout << endl;
-//       // Affichage: un deux trois
-//       const List<int> c = {42, 3, 14};
-//       for (List<int>::ConstIterator it = c.end(); it != c.begin(); --it)
-//          cout << *it << " ";
-//       cout << endl;
-//       // Affichage: 14 3 42
+
+      for (List<string>::Iterator it = l.begin(); it != l.end(); ++it)
+         cout << *it << " ";
+      cout << endl;
+      // Affichage: un deux trois
+
+      const List<int> c = {42, 3, 14};
+      for (List<int>::ConstIterator it = c.end(); it != c.begin(); --it)
+         cout << *it << " ";
+      cout << endl;
+      // Affichage: 14 3 42
    }
 
    return EXIT_SUCCESS;
