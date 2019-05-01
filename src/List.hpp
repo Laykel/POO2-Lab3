@@ -42,7 +42,7 @@ class List {
       Node* next;
 
       //! Ease construction of nodes when only the data is known
-      Node(T data, Node* previous = nullptr, Node* next = nullptr)
+      explicit Node(T data, Node* previous = nullptr, Node* next = nullptr)
       : data(data), previous(previous), next(next) {}
    };
 
@@ -96,11 +96,9 @@ public:
       /**
        * Member property access operator (read/write)
        *
-       * @return
+       * @return The current node's specified property
        */
-      T* operator->() const {
-         return this->pointer;
-      }
+      T* operator->() const;
    };
 
    /**
@@ -122,11 +120,9 @@ public:
       /**
        * Member property access operator (read-only)
        *
-       * @return
+       * @return The current node's specified property
        */
-      const T* operator->() const {
-         return this->pointer;
-      }
+      const T* operator->() const;
    };
 
 public:
@@ -177,7 +173,7 @@ public:
     * @param index The index of the element to access
     * @return A reference to the (constant) value of the element at index
     */
-   const T& operator[](const size_t index) const;
+   const T& operator[](size_t index) const;
 
    /**
     * Read/write array subscript operator
@@ -185,7 +181,7 @@ public:
     * @param index The index of the element to access
     * @return A reference to the value of the element at index
     */
-   T& operator[](const size_t index);
+   T& operator[](size_t index);
 
    /**
     * Insert an object at the beginning of the list
