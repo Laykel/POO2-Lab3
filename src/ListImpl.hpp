@@ -45,11 +45,27 @@ typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::op
    return *this;
 }
 
+// Postfix incrementation operator
+template <typename T>
+typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator ++(int) {
+   List<T>::GenericIterator::GenericIterator tmp = *this;
+   ++*this;
+   return tmp;
+}
+
 // Prefix decrementation operator
 template <typename T>
 typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::operator--() {
    pointer = pointer->previous;
    return *this;
+}
+
+// Postfix decrementation operator
+template <typename T>
+typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator --(int) {
+   List<T>::GenericIterator::GenericIterator tmp = *this;
+   --*this;
+   return tmp;
 }
 
 // Equality logic operator

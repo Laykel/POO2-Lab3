@@ -52,9 +52,15 @@ class List {
 
       //! Prefix incrementation operator
       GenericIterator& operator++();
+      
+      //! Postfix incrementation operator
+      GenericIterator operator++(int);
 
       //! Prefix decrementation operator
       GenericIterator& operator--();
+      
+      //! Postfix decrementation operator
+      GenericIterator operator--(int);
 
       //! Equality logic operator
       bool operator==(const GenericIterator& val) const;
