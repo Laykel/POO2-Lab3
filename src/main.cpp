@@ -12,6 +12,9 @@
 
 #include <iostream>
 #include "List.hpp"
+#include "Animal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
 
 using namespace std;
 
@@ -124,6 +127,17 @@ int main() {
       cout << *it << " ";
    cout << endl;
    // Affichage: 14 3 42
+   
+   // Test liaison dynamique
+   Dog d1;
+   Cat c1;
+   Cat c2;
+   Animal a1;
+   List<Animal> la {d1, c1, c2, a1};
+   
+   for (List<Animal>::Iterator it = la.begin(); it != la.end(); ++it)
+      (*it).makeSound();
+   cout << endl;
 
    return EXIT_SUCCESS;
 }
