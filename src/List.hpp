@@ -51,18 +51,18 @@ class List {
       GenericIterator(Node* pointer);
 
       //! Prefix incrementation operator
-      virtual GenericIterator& operator++();
+      GenericIterator& operator++();
 
       //! Prefix decrementation operator
-      virtual GenericIterator& operator--();
+      GenericIterator& operator--();
 
       //! Equality logic operator
-      virtual bool operator==(const GenericIterator& val) const;
+      bool operator==(const GenericIterator& val) const;
 
       //! Inequality logic operator
-      virtual bool operator!=(const GenericIterator& val) const;
+      bool operator!=(const GenericIterator& val) const;
 
-      // TODO: Other ++, --, ->, ...
+      // TODO: Other ++, --
 
    protected:
       Node* pointer;
@@ -83,7 +83,9 @@ public:
        *
        * @return The value in the node pointed to by the iterator
        */
-      T& operator*();
+      T& operator*() const;
+
+      // TODO: ->
    };
 
    /**
@@ -95,18 +97,26 @@ public:
       ConstIterator(Node* pointer)
       : GenericIterator(pointer) {}
 
+      //! Prefix incrementation operator
+      ConstIterator& operator++() {
+         return (ConstIterator&) GenericIterator::operator++();
+      }
+
       /**
        * Member access operator (read-only)
        *
        * @return The value in the node pointed to by the iterator
        */
-      const T& operator*();
+      const T& operator*() const;
+
+      // TODO: ->
    };
 
 public:
    /**
     * Empty constructor
-    * <p>Creates null head and tail</p>
+    * <p>
+    * Creates null head and tail
     */
    explicit List();
 
@@ -235,7 +245,7 @@ private:
     *
     * @param index The index of the node to access
     */
-    Node* accessAt(size_t index);
+   Node* accessAt(size_t index);
 
 private:
    // Head node of the list

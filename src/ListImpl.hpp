@@ -66,13 +66,13 @@ bool List<T>::GenericIterator::operator!=(const GenericIterator& val) const {
 
 // Member access operator (read/write)
 template <typename T>
-T& List<T>::Iterator::operator*() {
+T& List<T>::Iterator::operator*() const {
    return this->pointer->data;
 }
 
 // Member access operator (read-only)
 template <typename T>
-const T& List<T>::ConstIterator::operator*() {
+const T& List<T>::ConstIterator::operator*() const {
    return this->pointer->data;
 }
 
