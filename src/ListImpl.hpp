@@ -102,13 +102,13 @@ List<T>::List() : head(nullptr), tail(nullptr), _size(0) {}
 template <typename T>
 List<T>::List(const std::initializer_list<T>& args) : _size(args.size()) {
    // Insert first value
-   head = new Node{*args.begin(), nullptr, nullptr};
+   head = new Node(*args.begin());
    tail = head;
 
    // Read initializer list's values
    for (const T* elem = args.begin()+1; elem != args.end(); ++elem) {
       // Create new element and update previous node's next
-      tail->next = new Node{*elem, tail, nullptr};
+      tail->next = new Node(*elem, tail);
       // Update tail
       tail = tail->next;
    }
@@ -144,13 +144,13 @@ List<T>& List<T>::operator= (const List& other) {
 
    // Set head and tail
    Node* node = other.head;
-   head = new Node{node->data, nullptr, nullptr};
+   head = new Node(node->data);
    tail = head;
    node = node->next;
 
    // Set the rest
    while (node != nullptr) {
-      tail->next = new Node{node->data, tail, nullptr};
+      tail->next = new Node(node->data, tail);
       tail = tail->next;
       node = node->next;
    }
@@ -181,11 +181,11 @@ template <typename T>
 void List<T>::insert(const T& o) {
    // If the list is empty
    if (head == nullptr) {
-      head = new Node{o, nullptr, nullptr};
+      head = new Node(o);
       tail = head;
    }
    else {
-      head->previous = new Node{o, nullptr, head};
+      head->previous = new Node(o, nullptr, head);
       head = head->previous;
    }
    _size++;
@@ -196,11 +196,11 @@ template <typename T>
 void List<T>::append(const T& o) {
    // If the list is empty
    if (head == nullptr) {
-      head = new Node{o, nullptr, nullptr};
+      head = new Node(o);
       tail = head;
    }
    else {
-      tail->next = new Node{o, tail, nullptr};
+      tail->next = new Node(o, tail);
       tail = tail->next;
    }
    _size++;

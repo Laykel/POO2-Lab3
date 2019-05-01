@@ -40,6 +40,10 @@ class List {
 
       Node* previous;
       Node* next;
+
+      //! Ease construction of nodes when only the data is known
+      Node(T data, Node* previous = nullptr, Node* next = nullptr)
+      : data(data), previous(previous), next(next) {}
    };
 
    /**
@@ -68,8 +72,6 @@ class List {
       //! Inequality logic operator
       bool operator!=(const GenericIterator& val) const;
 
-      // TODO: Other ++, --
-
    protected:
       Node* pointer;
    };
@@ -84,11 +86,6 @@ public:
       explicit Iterator(Node* pointer)
       : GenericIterator(pointer) {}
 
-      //! Prefix incrementation operator (overrides parent's with covariant return type)
-      Iterator& operator++() {
-         return (Iterator&) GenericIterator::operator++();
-      }
-
       /**
        * Member access operator (read/write)
        *
@@ -96,7 +93,14 @@ public:
        */
       T& operator*() const;
 
-      // TODO: ->
+      /**
+       * Member property access operator (read/write)
+       *
+       * @return
+       */
+      T* operator->() const {
+         return this->pointer;
+      }
    };
 
    /**
@@ -108,11 +112,6 @@ public:
       explicit ConstIterator(Node* pointer)
       : GenericIterator(pointer) {}
 
-      //! Prefix incrementation operator (overrides parent's with covariant return type)
-      ConstIterator& operator++() {
-         return (ConstIterator&) GenericIterator::operator++();
-      }
-
       /**
        * Member access operator (read-only)
        *
@@ -120,7 +119,14 @@ public:
        */
       const T& operator*() const;
 
-      // TODO: ->
+      /**
+       * Member property access operator (read-only)
+       *
+       * @return
+       */
+      const T* operator->() const {
+         return this->pointer;
+      }
    };
 
 public:

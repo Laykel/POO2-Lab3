@@ -20,6 +20,8 @@ using namespace std;
 
 // Test program for List class (almost unit tests)
 int main() {
+   // TODO: Test operator->
+
    cout << "Test simple constructor (expected: )" << endl;
    List<int> l1;
    cout << l1 << endl;
