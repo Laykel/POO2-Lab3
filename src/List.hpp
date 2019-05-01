@@ -55,16 +55,16 @@ class List {
       explicit GenericIterator(Node* pointer);
 
       //! Prefix incrementation operator
-      virtual GenericIterator& operator++();
+      GenericIterator& operator++();
 
       //! Postfix incrementation operator
-      virtual const GenericIterator operator++(int);
+      const GenericIterator operator++(int);
 
       //! Prefix decrementation operator
-      virtual GenericIterator& operator--();
+      GenericIterator& operator--();
 
       //! Postfix decrementation operator
-      virtual const GenericIterator operator--(int);
+      const GenericIterator operator--(int);
 
       //! Equality logic operator
       bool operator==(const GenericIterator& val) const;
