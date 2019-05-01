@@ -48,7 +48,7 @@ typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::op
 // Postfix incrementation operator
 template <typename T>
 typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator ++(int) {
-   List<T>::GenericIterator::GenericIterator tmp = *this;
+   GenericIterator tmp = *this;
    ++*this;
    return tmp;
 }
@@ -63,7 +63,7 @@ typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::op
 // Postfix decrementation operator
 template <typename T>
 typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator --(int) {
-   List<T>::GenericIterator::GenericIterator tmp = *this;
+   GenericIterator tmp = *this;
    --*this;
    return tmp;
 }

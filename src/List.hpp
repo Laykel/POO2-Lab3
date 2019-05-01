@@ -54,7 +54,8 @@ class List {
       GenericIterator& operator++();
       
       //! Postfix incrementation operator
-      GenericIterator operator++(int);
+      GenericIterator
+      operator++(int);
 
       //! Prefix decrementation operator
       GenericIterator& operator--();
