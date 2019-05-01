@@ -20,8 +20,6 @@ using namespace std;
 
 // Test program for List class (almost unit tests)
 int main() {
-   // TODO: Test operator->
-
    cout << "Test simple constructor (expected: )" << endl;
    List<int> l1;
    cout << l1 << endl;
@@ -127,10 +125,10 @@ int main() {
    const List<int> c = {42, 3, 14};
    for (List<int>::ConstIterator it = c.end(); it != c.begin(); --it)
       cout << *it << " ";
-   cout << endl;
    // Affichage: 14 3 42
-   
-   // Test liaison dynamique
+   cout << endl << string(30, '-') << endl;
+
+   // Test dynamic linking
    Animal* d1 = new Dog;
    Cat* c1 = new Cat;
    Cat* c2 = new Cat;

@@ -86,10 +86,22 @@ T& List<T>::Iterator::operator*() const {
    return this->pointer->data;
 }
 
+// Member property access operator (read/write)
+template <typename T>
+T* List<T>::Iterator::operator->() const {
+   return this->pointer;
+}
+
 // Member access operator (read-only)
 template <typename T>
 const T& List<T>::ConstIterator::operator*() const {
    return this->pointer->data;
+}
+
+// Member property access operator (read-only)
+template <typename T>
+const T* List<T>::ConstIterator::operator->() const {
+   return this->pointer;
 }
 
 // Member functions ---------------------------------------------------------------
@@ -166,13 +178,13 @@ size_t List<T>::size() const {
 
 // Read-only array subscript operator
 template <typename T>
-const T& List<T>::operator[](const size_t index) const {
+const T& List<T>::operator[](size_t index) const {
    return accessAt(index)->data;
 }
 
 // Read/write array subscript operator
 template <typename T>
-T& List<T>::operator[](const size_t index) {
+T& List<T>::operator[](size_t index) {
    return accessAt(index)->data;
 }
 
