@@ -32,7 +32,7 @@ int main() {
    cout << l3 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test list of strings" << endl;
+   cout << "Test dynamically allocated list of strings" << endl;
    List<string>* l4 = new List<string>{"Rohan", "Gondor"};
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
@@ -91,13 +91,7 @@ int main() {
    cout << l2 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test iterators on list of strings" << endl;
    List<string> l5{"what", "a", "beautiful", "world"};
-   // Test iterators
-   for (auto it = l5.begin(); it != l5.end(); ++it) {
-      cout << &*it << " - " << *it << endl;
-   }
-   cout << string(30, '-') << endl;
 
    cout << "Test for each with iterators" << endl;
    for (string s : l5) {
@@ -115,6 +109,7 @@ int main() {
    delete l4;
 
    // Given tests in the assignment
+   cout << "Tests given in the assignment" << endl;
    {
       List<string> l;
       l.append("un");
