@@ -29,7 +29,7 @@ std::ostream& operator<<(std::ostream& os, const List<T>& a);
  */
 template <typename T>
 class List {
-   // Operator <<
+   //! Operator <<
    friend std::ostream& operator<< <>(std::ostream& os, const List& a);
 
    /**
@@ -48,20 +48,19 @@ class List {
    class GenericIterator {
    public:
       //! Constructor
-      GenericIterator(Node* pointer);
+      explicit GenericIterator(Node* pointer);
 
       //! Prefix incrementation operator
-      GenericIterator& operator++();
-      
+      virtual GenericIterator& operator++();
+
       //! Postfix incrementation operator
-      GenericIterator
-      operator++(int);
+      virtual const GenericIterator operator++(int);
 
       //! Prefix decrementation operator
-      GenericIterator& operator--();
-      
+      virtual GenericIterator& operator--();
+
       //! Postfix decrementation operator
-      GenericIterator operator--(int);
+      virtual const GenericIterator operator--(int);
 
       //! Equality logic operator
       bool operator==(const GenericIterator& val) const;
@@ -82,8 +81,13 @@ public:
    class Iterator : public GenericIterator {
    public:
       //! Constructor
-      Iterator(Node* pointer)
+      explicit Iterator(Node* pointer)
       : GenericIterator(pointer) {}
+
+      //! Prefix incrementation operator (overrides parent's with covariant return type)
+      Iterator& operator++() {
+         return (Iterator&) GenericIterator::operator++();
+      }
 
       /**
        * Member access operator (read/write)
@@ -101,10 +105,10 @@ public:
    class ConstIterator : public GenericIterator {
    public:
       //! Constructor
-      ConstIterator(Node* pointer)
+      explicit ConstIterator(Node* pointer)
       : GenericIterator(pointer) {}
 
-      //! Prefix incrementation operator
+      //! Prefix incrementation operator (overrides parent's with covariant return type)
       ConstIterator& operator++() {
          return (ConstIterator&) GenericIterator::operator++();
       }

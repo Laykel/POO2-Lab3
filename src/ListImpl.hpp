@@ -16,7 +16,7 @@
 #include "List.hpp"
 #include <stdexcept>
 
-// Friend functions ---------------------------------------------
+// Friend functions ---------------------------------------------------------------
 
 // Output stream operator
 template <typename T>
@@ -31,7 +31,7 @@ std::ostream& operator<< (std::ostream& os, const List<T>& list) {
    return os;
 }
 
-// Iterators inner classes functions ----------------------------
+// Iterators inner classes functions ----------------------------------------------
 
 // Generic iterator constructor
 template <typename T>
@@ -47,7 +47,7 @@ typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::op
 
 // Postfix incrementation operator
 template <typename T>
-typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator ++(int) {
+const typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator++(int) {
    GenericIterator tmp = *this;
    ++*this;
    return tmp;
@@ -62,7 +62,7 @@ typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::op
 
 // Postfix decrementation operator
 template <typename T>
-typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator --(int) {
+const typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator--(int) {
    GenericIterator tmp = *this;
    --*this;
    return tmp;
@@ -92,7 +92,7 @@ const T& List<T>::ConstIterator::operator*() const {
    return this->pointer->data;
 }
 
-// Member functions ---------------------------------------------
+// Member functions ---------------------------------------------------------------
 
 // No parameter constructor
 template <typename T>
@@ -142,12 +142,13 @@ List<T>& List<T>::operator= (const List& other) {
    head = tail = nullptr;
    _size = other.size();
 
-   // TODO replace with a private init method when iterators are implemented (same as initializer list constructor)
+   // Set head and tail
    Node* node = other.head;
    head = new Node{node->data, nullptr, nullptr};
    tail = head;
    node = node->next;
 
+   // Set the rest
    while (node != nullptr) {
       tail->next = new Node{node->data, tail, nullptr};
       tail = tail->next;
@@ -283,7 +284,7 @@ typename List<T>::ConstIterator List<T>::end() const {
    return ConstIterator(tail);
 }
 
-// Private member functions ---------------------------------------------
+// Private member functions ---------------------------------------------------------------
 
 // Destruction helper
 template <typename T>
