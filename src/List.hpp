@@ -48,30 +48,21 @@ class List {
    class GenericIterator {
    public:
       //! Constructor
-      GenericIterator(Node* pointer)
-      : pointer(pointer) {}
+      GenericIterator(Node* pointer);
 
-      // Prefix ++
-      virtual GenericIterator& operator++() {
-         pointer = pointer->next;
-         return *this;
-      }
+      //! Prefix incrementation operator
+      virtual GenericIterator& operator++();
 
-      // Prefix --
-      virtual GenericIterator& operator--() {
-         pointer = pointer->previous;
-         return *this;
-      }
+      //! Prefix decrementation operator
+      virtual GenericIterator& operator--();
 
-      virtual bool operator==(const GenericIterator& val) const {
-         return (pointer == val.pointer);
-      }
+      //! Equality logic operator
+      virtual bool operator==(const GenericIterator& val) const;
 
-      virtual bool operator!=(const GenericIterator& val) const {
-         return !(val == *this);
-      }
+      //! Inequality logic operator
+      virtual bool operator!=(const GenericIterator& val) const;
 
-      // Other ++, -> ...
+      // TODO: Other ++, --, ->, ...
 
    protected:
       Node* pointer;
@@ -92,9 +83,7 @@ public:
        *
        * @return The value in the node pointed to by the iterator
        */
-      T& operator*() {
-         return this->pointer->data;
-      }
+      T& operator*();
    };
 
    /**
@@ -111,9 +100,7 @@ public:
        *
        * @return The value in the node pointed to by the iterator
        */
-      const T& operator*() {
-         return this->pointer->data;
-      }
+      const T& operator*();
    };
 
 public:

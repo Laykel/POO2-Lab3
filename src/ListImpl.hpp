@@ -31,6 +31,51 @@ std::ostream& operator<< (std::ostream& os, const List<T>& list) {
    return os;
 }
 
+// Iterators inner classes functions ----------------------------
+
+// Generic iterator constructor
+template <typename T>
+List<T>::GenericIterator::GenericIterator(Node* pointer)
+: pointer(pointer) {}
+
+// Prefix incrementation operator
+template <typename T>
+typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::operator++() {
+   pointer = pointer->next;
+   return *this;
+}
+
+// Prefix decrementation operator
+template <typename T>
+typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::operator--() {
+   pointer = pointer->previous;
+   return *this;
+}
+
+// Equality logic operator
+template <typename T>
+bool List<T>::GenericIterator::operator==(const GenericIterator& val) const {
+   return (pointer == val.pointer);
+}
+
+// Inequality logic operator
+template <typename T>
+bool List<T>::GenericIterator::operator!=(const GenericIterator& val) const {
+   return !(val == *this);
+}
+
+// Member access operator (read/write)
+template <typename T>
+T& List<T>::Iterator::operator*() {
+   return this->pointer->data;
+}
+
+// Member access operator (read-only)
+template <typename T>
+const T& List<T>::ConstIterator::operator*() {
+   return this->pointer->data;
+}
+
 // Member functions ---------------------------------------------
 
 // No parameter constructor
