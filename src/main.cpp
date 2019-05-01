@@ -131,14 +131,16 @@ int main() {
    // Affichage: 14 3 42
    
    // Test liaison dynamique
-   Dog d1;
-   Cat c1;
-   Cat c2;
-   Animal a1;
-   List<Animal> la {d1, c1, c2, a1};
+   Animal* d1 = new Dog;
+   Cat* c1 = new Cat;
+   Cat* c2 = new Cat;
+   Animal* a1 = new Animal;
+   List<Animal*> la{d1,c1,c2,a1};
    
-   for (List<Animal>::Iterator it = la.begin(); it != la.end(); ++it)
-      (*it).makeSound();
+   for (List<Animal*>::Iterator it = la.begin(); it != la.end(); it++) {
+      Animal* a = *it;
+      a->makeSound();
+   }
    cout << endl;
 
    return EXIT_SUCCESS;
