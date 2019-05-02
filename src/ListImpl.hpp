@@ -89,7 +89,7 @@ T& List<T>::Iterator::operator*() const {
 // Member property access operator (read/write)
 template <typename T>
 T* List<T>::Iterator::operator->() const {
-   return this->pointer;
+   return &this->operator*();
 }
 
 // Member access operator (read-only)
