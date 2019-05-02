@@ -264,7 +264,8 @@ private:
    // Tail node of the list
    Node* tail;
 
-   // TODO: Use that to make work iterators in both directions (bi-directional iterators)
+   // TODO: Use that to make work iterators in both directions 
+   // (bi-directional iterators)
    // Node* beforeHead;
    // Node* afterTail;
 

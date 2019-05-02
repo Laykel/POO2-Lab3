@@ -31,7 +31,7 @@ std::ostream& operator<< (std::ostream& os, const List<T>& list) {
    return os;
 }
 
-// GenericIterator inner class ------------------------------------------------------------
+// GenericIterator inner class ------------------------------------------------------
 
 // Generic iterator constructor
 template <typename T>
@@ -40,14 +40,16 @@ List<T>::GenericIterator::GenericIterator(Node* pointer)
 
 // Prefix incrementation operator
 template <typename T>
-typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::operator++() {
+typename 
+List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::operator++() {
    pointer = pointer->next;
    return *this;
 }
 
 // Postfix incrementation operator
 template <typename T>
-const typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator++(int) {
+const typename 
+List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator++(int) {
    GenericIterator tmp = *this;
    ++*this;
    return tmp;
@@ -55,14 +57,16 @@ const typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterato
 
 // Prefix decrementation operator
 template <typename T>
-typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::operator--() {
+typename 
+List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::operator--() {
    pointer = pointer->previous;
    return *this;
 }
 
 // Postfix decrementation operator
 template <typename T>
-const typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator--(int) {
+const typename 
+List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator--(int) {
    GenericIterator tmp = *this;
    --*this;
    return tmp;
@@ -80,7 +84,7 @@ bool List<T>::GenericIterator::operator!=(const GenericIterator& val) const {
    return !(val == *this);
 }
 
-// Iterator inner class ----------------------------------------------------------------------
+// Iterator inner class -------------------------------------------------------------
 
 template <typename T>
 List<T>::Iterator::Iterator(Node* pointer)
@@ -98,7 +102,7 @@ T& List<T>::Iterator::operator->() const {
    return this->pointer->data;
 }
 
-// ConstIterator inner class -----------------------------------------------------------------
+// ConstIterator inner class --------------------------------------------------------
 
 template <typename T>
 List<T>::ConstIterator::ConstIterator(Node* pointer)
@@ -313,7 +317,7 @@ typename List<T>::ConstIterator List<T>::end() const {
    return ConstIterator(tail);
 }
 
-// Private member functions ---------------------------------------------------------------
+// Private member functions ---------------------------------------------------------
 
 // Destruction helper
 template <typename T>

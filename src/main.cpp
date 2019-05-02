@@ -35,7 +35,8 @@ int main() {
    cout << l3 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test dynamically allocated list of strings (expected: Rohan Gondor)" << endl;
+   cout << "Test dynamically allocated list of strings (expected: Rohan Gondor)" 
+        << endl;
    List<string>* l4 = new List<string>{"Rohan", "Gondor"};
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
@@ -50,7 +51,8 @@ int main() {
    cout << l2 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test insert method l2.insert(23) (expected: 23 12 13 56 90 0 42)" << endl;
+   cout << "Test insert method l2.insert(23) (expected: 23 12 13 56 90 0 42)" 
+        << endl;
    l2.insert(23);
    cout << l2 << endl;
    cout << string(30, '-') << endl;
@@ -60,7 +62,8 @@ int main() {
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test append l4.append(\"Ca boom ?\") (expected: Hello Rohan Gondor Ca boom?)" << endl;
+   cout << "Test append l4.append(\"Ca boom ?\") "
+           "(expected: Hello Rohan Gondor Ca boom?)" << endl;
    l4->append("Ca boom ?");
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
@@ -79,12 +82,14 @@ int main() {
    cout << "Index of 90 is " << l2.find(90) << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test remove(object) l4.remove(\"Hello\") (expected: Gondor Ca boom?)" << endl;
+   cout << "Test remove(object) l4.remove(\"Hello\") (expected: Gondor Ca boom?)" 
+        << endl;
    l4->remove("Hello");
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test remove(object) l4.remove(\"NotHere\") (expected: Object not in the list!)" << endl;
+   cout << "Test remove(object) l4.remove(\"NotHere\") "
+           "(expected: Object not in the list!)" << endl;
    l4->remove("NotHere");
    cout << string(30, '-') << endl;
 
