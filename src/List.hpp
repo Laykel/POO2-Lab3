@@ -20,7 +20,7 @@ template <typename T> class List;
 
 // Predeclaration of friend functions
 template <typename T>
-std::ostream& operator<<(std::ostream& os, const List<T>& a);
+std::ostream& operator<<(std::ostream& os, const List<T>& list);
 
 /**
  * Generic List class with iterators
@@ -30,7 +30,7 @@ std::ostream& operator<<(std::ostream& os, const List<T>& a);
 template <typename T>
 class List {
    //! Operator <<
-   friend std::ostream& operator<< <>(std::ostream& os, const List& a);
+   friend std::ostream& operator<< <>(std::ostream& os, const List& list);
 
    /**
     * Elements of the list, with pointers to next and previous elements
