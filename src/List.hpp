@@ -83,8 +83,7 @@ public:
    class Iterator : public GenericIterator {
    public:
       //! Constructor
-      explicit Iterator(Node* pointer)
-      : GenericIterator(pointer) {}
+      explicit Iterator(Node* pointer);
 
       /**
        * Member access operator (read/write)
@@ -107,8 +106,7 @@ public:
    class ConstIterator : public GenericIterator {
    public:
       //! Constructor
-      explicit ConstIterator(Node* pointer)
-      : GenericIterator(pointer) {}
+      explicit ConstIterator(Node* pointer);
 
       /**
        * Member access operator (read-only)
@@ -265,6 +263,9 @@ private:
    Node* head;
    // Tail node of the list
    Node* tail;
+
+   Node* beforeHead;
+   Node* afterTail;
 
    // Size of the list
    size_t _size;

@@ -16,22 +16,26 @@
 #include "List.hpp"
 #include <stdexcept>
 
-// Friend functions ---------------------------------------------------------------
+// Friend functions ----------------------------------------------------------------------
 
 // Output stream operator
 template <typename T>
 std::ostream& operator<< (std::ostream& os, const List<T>& list) {
-   auto node = list.head;
+//   auto node = list.head;
 
-   while (node != nullptr) {
-      os << node->data << " ";
-      node = node->next;
+//   while (node != nullptr) {
+//      os << node->data << " ";
+//      node = node->next;
+//   }
+
+   for (const T& elem : list) {
+      os << elem << " ";
    }
 
    return os;
 }
 
-// Iterators inner classes functions ----------------------------------------------
+// GenericIterator inner class ------------------------------------------------------------
 
 // Generic iterator constructor
 template <typename T>
@@ -48,7 +52,7 @@ typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::op
 // Postfix incrementation operator
 template <typename T>
 const typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator++(int) {
-   GenericIterator tmp = *this;
+   GenericIterator tmp(*this);
    ++*this;
    return tmp;
 }
@@ -63,7 +67,7 @@ typename List<T>::GenericIterator::GenericIterator& List<T>::GenericIterator::op
 // Postfix decrementation operator
 template <typename T>
 const typename List<T>::GenericIterator::GenericIterator List<T>::GenericIterator::operator--(int) {
-   GenericIterator tmp = *this;
+   GenericIterator tmp(*this);
    --*this;
    return tmp;
 }
@@ -80,6 +84,12 @@ bool List<T>::GenericIterator::operator!=(const GenericIterator& val) const {
    return !(val == *this);
 }
 
+// Iterator inner class ----------------------------------------------------------------------
+
+template <typename T>
+List<T>::Iterator::Iterator(Node* pointer)
+: GenericIterator(pointer) {}
+
 // Member access operator (read/write)
 template <typename T>
 T& List<T>::Iterator::operator*() const {
@@ -89,8 +99,14 @@ T& List<T>::Iterator::operator*() const {
 // Member property access operator (read/write)
 template <typename T>
 T* List<T>::Iterator::operator->() const {
-   return this->pointer;
+   return this->pointer->data;
 }
+
+// ConstIterator inner class -----------------------------------------------------------------
+
+template <typename T>
+List<T>::ConstIterator::ConstIterator(Node* pointer)
+: GenericIterator(pointer) {}
 
 // Member access operator (read-only)
 template <typename T>
@@ -101,34 +117,28 @@ const T& List<T>::ConstIterator::operator*() const {
 // Member property access operator (read-only)
 template <typename T>
 const T* List<T>::ConstIterator::operator->() const {
-   return this->pointer;
+   return this->pointer->data;
 }
 
 // Member functions ---------------------------------------------------------------
 
 // No parameter constructor
 template <typename T>
-List<T>::List() : head(nullptr), tail(nullptr), _size(0) {}
+List<T>::List()
+: head(nullptr), tail(nullptr), beforeHead(nullptr), afterTail(nullptr), _size(0) {}
 
 // Initializer list constructor
 template <typename T>
-List<T>::List(const std::initializer_list<T>& args) : _size(args.size()) {
-   // Insert first value
-   head = new Node(*args.begin());
-   tail = head;
-
-   // Read initializer list's values
-   for (const T* elem = args.begin()+1; elem != args.end(); ++elem) {
-      // Create new element and update previous node's next
-      tail->next = new Node(*elem, tail);
-      // Update tail
-      tail = tail->next;
+List<T>::List(const std::initializer_list<T>& args) : List() {
+   _size = args.size();
+   for (const T& elem : args) {
+      append(elem);
    }
 }
 
 // Copy constructor
 template <typename T>
-List<T>::List(const List& other) : head(nullptr), tail(nullptr), _size(0) {
+List<T>::List(const List& other) : List() {
    // Call assignment operator
    *this = other;
 }
@@ -136,7 +146,7 @@ List<T>::List(const List& other) : head(nullptr), tail(nullptr), _size(0) {
 // Destructor
 template <typename T>
 List<T>::~List() {
-   destroy(head);
+   destroy(beforeHead);
 }
 
 // Assignment operator
@@ -148,23 +158,15 @@ List<T>& List<T>::operator= (const List& other) {
    }
 
    // Deallocate memory of current list
-   destroy(head);
+   destroy(beforeHead);
 
    // Reinitialize
    head = tail = nullptr;
    _size = other.size();
 
-   // Set head and tail
-   Node* node = other.head;
-   head = new Node(node->data);
-   tail = head;
-   node = node->next;
-
-   // Set the rest
-   while (node != nullptr) {
-      tail->next = new Node(node->data, tail);
-      tail = tail->next;
-      node = node->next;
+   // Append elements
+   for (const T& elem : other) {
+      append(elem);
    }
 
    return *this;
@@ -193,13 +195,14 @@ template <typename T>
 void List<T>::insert(const T& o) {
    // If the list is empty
    if (head == nullptr) {
-      head = new Node(o);
-      tail = head;
+      // Create first node
+      append(o);
    }
    else {
       head->previous = new Node(o, nullptr, head);
       head = head->previous;
    }
+
    _size++;
 }
 
@@ -208,13 +211,27 @@ template <typename T>
 void List<T>::append(const T& o) {
    // If the list is empty
    if (head == nullptr) {
+      // Create first node
       head = new Node(o);
       tail = head;
+
+      // Create sentinel nodes
+      beforeHead = new Node(o, head);
+      afterTail = new Node(o, tail);
    }
    else {
+      // Append new node
       tail->next = new Node(o, tail);
       tail = tail->next;
+
+      // Update sentinel nodes
+      afterTail->data = tail->data;
+      afterTail->previous = tail;
+      afterTail->next = tail->previous;
+
+      beforeHead->next = head->next;
    }
+
    _size++;
 }
 
@@ -275,25 +292,25 @@ int List<T>::find(const T& o) const {
 // Return a generic iterator pointing to the beginning of the list
 template <typename T>
 typename List<T>::Iterator List<T>::begin() {
-   return Iterator(head);
+   return Iterator(beforeHead);
 }
 
 // Return a generic iterator pointing to the end of the list
 template <typename T>
 typename List<T>::Iterator List<T>::end() {
-   return Iterator(tail);
+   return Iterator(afterTail);
 }
 
 // Return a generic iterator pointing to the beginning of the list
 template <typename T>
 typename List<T>::ConstIterator List<T>::begin() const {
-   return ConstIterator(head);
+   return ConstIterator(beforeHead);
 }
 
 // Return a generic iterator pointing to the end of the list
 template <typename T>
 typename List<T>::ConstIterator List<T>::end() const {
-   return ConstIterator(tail);
+   return ConstIterator(afterTail);
 }
 
 // Private member functions ---------------------------------------------------------------
