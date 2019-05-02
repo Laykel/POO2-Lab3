@@ -31,7 +31,7 @@ std::ostream& operator<< (std::ostream& os, const List<T>& list) {
    return os;
 }
 
-// Iterators inner classes functions ----------------------------------------------
+// GenericIterator inner class ------------------------------------------------------------
 
 // Generic iterator constructor
 template <typename T>
@@ -80,6 +80,12 @@ bool List<T>::GenericIterator::operator!=(const GenericIterator& val) const {
    return !(val == *this);
 }
 
+// Iterator inner class ----------------------------------------------------------------------
+
+template <typename T>
+List<T>::Iterator::Iterator(Node* pointer)
+: GenericIterator(pointer) {}
+
 // Member access operator (read/write)
 template <typename T>
 T& List<T>::Iterator::operator*() const {
@@ -88,9 +94,15 @@ T& List<T>::Iterator::operator*() const {
 
 // Member property access operator (read/write)
 template <typename T>
-T* List<T>::Iterator::operator->() const {
-   return &this->operator*();
+T& List<T>::Iterator::operator->() const {
+   return this->pointer->data;
 }
+
+// ConstIterator inner class -----------------------------------------------------------------
+
+template <typename T>
+List<T>::ConstIterator::ConstIterator(Node* pointer)
+: GenericIterator(pointer) {}
 
 // Member access operator (read-only)
 template <typename T>
@@ -100,19 +112,22 @@ const T& List<T>::ConstIterator::operator*() const {
 
 // Member property access operator (read-only)
 template <typename T>
-const T* List<T>::ConstIterator::operator->() const {
-   return this->pointer;
+const T& List<T>::ConstIterator::operator->() const {
+   return this->pointer->data;
 }
 
 // Member functions ---------------------------------------------------------------
 
 // No parameter constructor
 template <typename T>
-List<T>::List() : head(nullptr), tail(nullptr), _size(0) {}
+List<T>::List()
+: head(nullptr), tail(nullptr), _size(0) {}
 
 // Initializer list constructor
 template <typename T>
-List<T>::List(const std::initializer_list<T>& args) : _size(args.size()) {
+List<T>::List(const std::initializer_list<T>& args) : List() {
+   _size = args.size();
+
    // Insert first value
    head = new Node(*args.begin());
    tail = head;
@@ -128,7 +143,7 @@ List<T>::List(const std::initializer_list<T>& args) : _size(args.size()) {
 
 // Copy constructor
 template <typename T>
-List<T>::List(const List& other) : head(nullptr), tail(nullptr), _size(0) {
+List<T>::List(const List& other) : List() {
    // Call assignment operator
    *this = other;
 }
@@ -200,6 +215,7 @@ void List<T>::insert(const T& o) {
       head->previous = new Node(o, nullptr, head);
       head = head->previous;
    }
+
    _size++;
 }
 
@@ -215,6 +231,7 @@ void List<T>::append(const T& o) {
       tail->next = new Node(o, tail);
       tail = tail->next;
    }
+
    _size++;
 }
 

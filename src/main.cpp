@@ -136,7 +136,7 @@ int main() {
    List<Animal*> la{d1,c1,c2,a1};
    
    for (List<Animal*>::Iterator it = la.begin(); it != la.end(); it++) {
-      (*it)->makeSound();
+      it->makeSound();
    }
    cout << endl;
 
