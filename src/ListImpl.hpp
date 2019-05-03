@@ -203,8 +203,15 @@ void List<T>::insert(const T& o) {
       append(o);
    }
    else {
+      // Insert new node
       head->previous = new Node(o, nullptr, head);
       head = head->previous;
+      head->previous = beforeHead;
+
+      // Update sentinel nodes
+      beforeHead->data = head->data;
+      beforeHead->next = head->next;
+      afterTail->previous = tail->previous;
    }
 
    _size++;
@@ -220,7 +227,7 @@ void List<T>::append(const T& o) {
       tail = head;
 
       // Create sentinel nodes
-      beforeHead = new Node(o, head);
+      beforeHead = new Node(o);
       head->previous = beforeHead;
       afterTail = new Node(o, tail);
    }
@@ -232,9 +239,7 @@ void List<T>::append(const T& o) {
 
       // Update sentinel nodes
       afterTail->data = tail->data;
-      afterTail->next = tail;
       afterTail->previous = tail->previous;
-
       beforeHead->next = head->next;
    }
 

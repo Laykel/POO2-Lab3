@@ -40,11 +40,10 @@ int main() {
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   /*
    cout << "Test assignment operator (expected: 12 13 56 90 0)" << endl;
    l1 = l3;
    cout << l1 << endl;
-   cout << string(30, '-') << endl; */
+   cout << string(30, '-') << endl;
 
    cout << "Test append method l2.append(42) (expected: 12 13 56 90 0 42)" << endl;
    l2.append(42);
