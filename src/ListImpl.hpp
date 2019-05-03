@@ -252,18 +252,32 @@ void List<T>::removeAt(size_t index) {
    Node* toRemove = accessAt(index);
 
    // Check previous node
-   if (toRemove->previous != nullptr) {
+   if (toRemove != head) {
       toRemove->previous->next = toRemove->next;
+      // Update beforeHead
+      if(index == 1) {
+         beforeHead->next = toRemove->next;
+      }
    }
    else {
       head = toRemove->next;
+      // Update beforeHead
+      beforeHead->next = head->next;
+      beforeHead->data = head->data;
    }
    // Check next node
-   if (toRemove->next != nullptr) {
+   if (toRemove != tail) {
       toRemove->next->previous = toRemove->previous;
+      // Update afterTail
+      if(index == _size - 1) {
+         afterTail->previous = toRemove->previous;
+      }
    }
    else {
       tail = toRemove->previous;
+      // Update afterTail
+      afterTail->previous = tail->previous;
+      afterTail->data = tail->data;
    }
 
    // Deallocate specified node

@@ -66,28 +66,28 @@ int main() {
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-//   cout << "Test removeAt l4.removeAt(1) (expected: Hello Gondor Ca boom?)" << endl;
-//   l4->removeAt(1);
-//   cout << *l4 << endl;
-//   cout << string(30, '-') << endl;
-//
-//   cout << "Test removeAt l2.removeAt(3) (expected: 23 12 13 90 0 42)" << endl;
-//   l2.removeAt(3);
-//   cout << l2 << endl;
-//   cout << string(30, '-') << endl;
+   cout << "Test removeAt l4.removeAt(1) (expected: Hello Gondor Ca boom?)" << endl;
+   l4->removeAt(1);
+   cout << *l4 << endl;
+   cout << string(30, '-') << endl;
+
+   cout << "Test removeAt l2.removeAt(3) (expected: 23 12 13 90 0 42)" << endl;
+   l2.removeAt(3);
+   cout << l2 << endl;
+   cout << string(30, '-') << endl;
 
    cout << "Test find l2.find(90) (expected: Index of 90 is 3)" << endl;
    cout << "Index of 90 is " << l2.find(90) << endl;
    cout << string(30, '-') << endl;
 
-//   cout << "Test remove(object) l4.remove(\"Hello\") (expected: Gondor Ca boom?)" << endl;
-//   l4->remove("Hello");
-//   cout << *l4 << endl;
-//   cout << string(30, '-') << endl;
-//
-//   cout << "Test remove(object) l4.remove(\"NotHere\") (expected: Object not in the list!)" << endl;
-//   l4->remove("NotHere");
-//   cout << string(30, '-') << endl;
+   cout << "Test remove(object) l4.remove(\"Hello\") (expected: Gondor Ca boom?)" << endl;
+   l4->remove("Hello");
+   cout << *l4 << endl;
+   cout << string(30, '-') << endl;
+
+   cout << "Test remove(object) l4.remove(\"NotHere\") (expected: Object not in the list!)" << endl;
+   l4->remove("NotHere");
+   cout << string(30, '-') << endl;
 
    cout << "Test write with brackets operator (expected: 23 12 9 90 0 42)" << endl;
    l2[2] = 9;
