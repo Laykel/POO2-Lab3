@@ -146,7 +146,7 @@ List<T>::List(const List& other) : List() {
 // Destructor
 template <typename T>
 List<T>::~List() {
-   destroy(beforeHead);
+   destroy();
 }
 
 // Assignment operator
@@ -158,7 +158,7 @@ List<T>& List<T>::operator= (const List& other) {
    }
 
    // Deallocate memory of current list
-   destroy(beforeHead);
+   destroy();
 
    // Reinitialize
    head = tail = nullptr;
@@ -217,17 +217,19 @@ void List<T>::append(const T& o) {
 
       // Create sentinel nodes
       beforeHead = new Node(o, head);
+      head->previous = beforeHead;
       afterTail = new Node(o, tail);
    }
    else {
       // Append new node
       tail->next = new Node(o, tail);
       tail = tail->next;
+      tail->next = afterTail;
 
       // Update sentinel nodes
       afterTail->data = tail->data;
-      afterTail->previous = tail;
-      afterTail->next = tail->previous;
+      afterTail->next = tail;
+      afterTail->previous = tail->previous;
 
       beforeHead->next = head->next;
    }
@@ -317,12 +319,21 @@ typename List<T>::ConstIterator List<T>::end() const {
 
 // Destruction helper
 template <typename T>
-void List<T>::destroy(Node* root) {
+void List<T>::destroy() {
+   if (beforeHead == nullptr) {
+      return;
+   }
+
+   Node *current = beforeHead;
+
+   beforeHead->next = head;
+   afterTail->next = nullptr;
+
    // Deallocate every element after the root
-   while (root != nullptr) {
-      Node* tmp = root->next;
-      delete root;
-      root = tmp;
+   while (current != nullptr) {
+      Node* tmp = current->next;
+      delete current;
+      current = tmp;
    }
 }
 

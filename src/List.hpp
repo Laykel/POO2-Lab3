@@ -249,7 +249,7 @@ private:
    /**
     * Helper for the destruction of list or sub-lists
     */
-   void destroy(Node* root);
+   void destroy();
 
    /**
     * Helper index access member function
