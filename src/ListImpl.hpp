@@ -21,13 +21,6 @@
 // Output stream operator
 template <typename T>
 std::ostream& operator<< (std::ostream& os, const List<T>& list) {
-//   auto node = list.head;
-
-//   while (node != nullptr) {
-//      os << node->data << " ";
-//      node = node->next;
-//   }
-
    for (const T& elem : list) {
       os << elem << " ";
    }
