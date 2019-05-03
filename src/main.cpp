@@ -20,11 +20,6 @@ using namespace std;
 
 // Test program for List class (almost unit tests)
 int main() {
-   cout << "Test simple constructor (expected: )" << endl;
-   List<int> l1;
-   cout << l1 << endl;
-   cout << string(30, '-') << endl;
-
    cout << "Test initializer list constructor (expected: 12 13 56 90 0)" << endl;
    List<int> l2{12, 13, 56, 90, 0};
    cout << l2 << endl;
@@ -41,10 +36,11 @@ int main() {
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
+   /*
    cout << "Test assignment operator (expected: 12 13 56 90 0)" << endl;
    l1 = l3;
    cout << l1 << endl;
-   cout << string(30, '-') << endl;
+   cout << string(30, '-') << endl; */
 
    cout << "Test append method l2.append(42) (expected: 12 13 56 90 0 42)" << endl;
    l2.append(42);
@@ -124,14 +120,14 @@ int main() {
 
    for (List<string>::Iterator it = l.begin(); it != l.end(); ++it)
       cout << *it << " ";
-   cout << endl;
-   // Affichage: un deux trois
-
-   const List<int> c = {42, 3, 14};
+   // Affichage: 42 3 14
+   cout << endl << string(30, '-') << endl;
+/*
    for (List<int>::ConstIterator it = c.end(); it != c.begin(); --it)
       cout << *it << " ";
    // Affichage: 14 3 42
    cout << endl << string(30, '-') << endl;
+ */
 
    // Test dynamic linking
    cout << "Test dynamic linking" << endl;
