@@ -139,7 +139,7 @@ int main() {
 
    // Test dynamic linking
    cout << "Test dynamic linking" << endl;
-   Animal d1 = Dog();
+   Dog d1 = Dog();
    Cat c1 = Cat();
    Cat c2 = Cat();
    Animal a1 = Animal();

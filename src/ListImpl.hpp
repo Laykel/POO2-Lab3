@@ -254,6 +254,7 @@ void List<T>::removeAt(size_t index) {
    // Check previous node
    if (toRemove != head) {
       toRemove->previous->next = toRemove->next;
+
       // Update beforeHead
       if(index == 1) {
          beforeHead->next = toRemove->next;
@@ -265,9 +266,11 @@ void List<T>::removeAt(size_t index) {
       beforeHead->next = head->next;
       beforeHead->data = head->data;
    }
+
    // Check next node
    if (toRemove != tail) {
       toRemove->next->previous = toRemove->previous;
+
       // Update afterTail
       if(index == _size - 1) {
          afterTail->previous = toRemove->previous;
