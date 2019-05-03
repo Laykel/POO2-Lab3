@@ -249,7 +249,7 @@ private:
    /**
     * Helper for the destruction of list or sub-lists
     */
-   void destroy(Node* root);
+   void destroy();
 
    /**
     * Helper index access member function
@@ -264,10 +264,8 @@ private:
    // Tail node of the list
    Node* tail;
 
-   // TODO: Use that to make work iterators in both directions 
-   // (bi-directional iterators)
-   // Node* beforeHead;
-   // Node* afterTail;
+   Node* beforeHead;
+   Node* afterTail;
 
    // Size of the list
    size_t _size;

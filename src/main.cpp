@@ -34,8 +34,7 @@ int main() {
    const List<int> l3(l2);
    cout << l3 << endl;
    cout << string(30, '-') << endl;
-
-   cout << "Test dynamically allocated list of strings (expected: Rohan Gondor)" 
+   cout << "Test dynamically allocated list of strings (expected: Rohan Gondor)"
         << endl;
    List<string>* l4 = new List<string>{"Rohan", "Gondor"};
    cout << *l4 << endl;
@@ -51,7 +50,7 @@ int main() {
    cout << l2 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test insert method l2.insert(23) (expected: 23 12 13 56 90 0 42)" 
+   cout << "Test insert method l2.insert(23) (expected: 23 12 13 56 90 0 42)"
         << endl;
    l2.insert(23);
    cout << l2 << endl;
@@ -62,8 +61,7 @@ int main() {
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test append l4.append(\"Ca boom ?\") "
-           "(expected: Hello Rohan Gondor Ca boom?)" << endl;
+   cout << "Test append l4.append(\"Ca boom ?\") (expected: Hello Rohan Gondor Ca boom?)" << endl;
    l4->append("Ca boom ?");
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
@@ -82,14 +80,12 @@ int main() {
    cout << "Index of 90 is " << l2.find(90) << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test remove(object) l4.remove(\"Hello\") (expected: Gondor Ca boom?)" 
-        << endl;
+   cout << "Test remove(object) l4.remove(\"Hello\") (expected: Gondor Ca boom?)" << endl;
    l4->remove("Hello");
    cout << *l4 << endl;
    cout << string(30, '-') << endl;
 
-   cout << "Test remove(object) l4.remove(\"NotHere\") "
-           "(expected: Object not in the list!)" << endl;
+   cout << "Test remove(object) l4.remove(\"NotHere\") (expected: Object not in the list!)" << endl;
    l4->remove("NotHere");
    cout << string(30, '-') << endl;
 
@@ -112,6 +108,12 @@ int main() {
    }
    cout << endl << string(30, '-') << endl;
 
+   cout << "Test for each with inverse iterators (expected: 0 90 56 13 12)" << endl;
+   for (List<int>::ConstIterator it = l3.end(); it != l3.begin(); --it) {
+      cout << *it << " ";
+   }
+   cout << endl << string(30, '-') << endl;
+
    // Deallocate l4
    delete l4;
 
@@ -122,12 +124,14 @@ int main() {
    l.append("deux");
    l.append("trois");
 
+   cout << "Test for each with iterators (expected: un deux trois)" << endl;
    for (List<string>::Iterator it = l.begin(); it != l.end(); ++it)
       cout << *it << " ";
    cout << endl;
    // Affichage: un deux trois
 
    const List<int> c = {42, 3, 14};
+   cout << "Test for each with inverse iterators (expected: 14 3 42)" << endl;
    for (List<int>::ConstIterator it = c.end(); it != c.begin(); --it)
       cout << *it << " ";
    // Affichage: 14 3 42
@@ -135,7 +139,7 @@ int main() {
 
    // Test dynamic linking
    cout << "Test dynamic linking" << endl;
-   Animal d1 = Dog();
+   Dog d1 = Dog();
    Cat c1 = Cat();
    Cat c2 = Cat();
    Animal a1 = Animal();
